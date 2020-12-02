@@ -49,3 +49,24 @@ def final_prices(prices: List[int]) -> List[int]:
 
 
 print(final_prices([8,4,6,2,3]))
+
+
+def final_prices_monostack(prices: List[int]) -> List[int]:
+
+    # Monostack solution, O(N)
+    N = len(prices)
+    ans = [0] * N
+    stack = []
+
+    for i in range(N-1, -1, -1):
+        p = prices[i]
+        ans[i] = p
+        while stack and stack[-1] > p:
+            stack.pop()
+        if stack:
+            ans[i] -= stack[-1]
+        stack.append(p)
+    return ans
+
+
+print(final_prices_monostack([8,4,6,2,3]))
